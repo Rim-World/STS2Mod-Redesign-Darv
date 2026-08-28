@@ -1,0 +1,14 @@
+{
+  "id": "DarvRelicPoolMod",
+  "name": "重做达弗（Redesign Darv）",
+  "author": "再玩小卡组找人弄你",
+  "description": "重新设计了先古之民达弗的三个选项，详细见mod简介。",
+  "version": "1.0.0",
+  "has_pck": true,
+  "has_dll": true,
+  "min_game_version": "0.107.0",
+  "dependencies": [
+    { "id": "STS2-RitsuLib", "min_version": "0.5.14", "version": "0.5.14" }
+  ],
+  "affects_gameplay": true
+}
