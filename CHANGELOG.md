@@ -10,6 +10,8 @@
 - 文档按编号重命名并重建索引；新增 `4.SDD/`、`5.ChangeLog/`、`PRIVACY/`、`TMP/`、`TOOLS/` 与根 `CHANGELOG.md`、`.gitignore`。
 - 代码内容未做任何修改。
 
+提交编号：`8fe5b8b1ccdb340387eabd7c541bd1db8171eda3`
+
 ## [1.0.0] - 2026-08-29
 
 ### 新增

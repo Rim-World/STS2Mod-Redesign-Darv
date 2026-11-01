@@ -22,8 +22,8 @@
 
 | 时间 | 名称 | 版本号 | 大小 | 说明 |
 |---|---|---|---|---|
-| 2026-11-01 | `DarvRelicPoolMod.v1.0.0.zip` | 1.0.0 | 见 GitHub Release | v1.0.0 安装包，取自游戏 `mods/DarvRelicPoolMod/`，排除 `.sts2-workshop-uploader` 等点开头条目 |
-| 2026-11-01 | `DarvRelicPoolModSourceCode.zip` | 1.0.0 | 见 GitHub Release | v1.0.0 源码包，取自 `9.SRC/DarvRelicPoolMod/`，排除 `.godot/`、`bin/`、`obj/`、`*.dll`、`*.pck`、`*.pdb` |
+| 2026-11-01 | `DarvRelicPoolMod.v1.0.0.zip` | 1.0.0 | 366 KB / 4 文件 | v1.0.0 安装包，取自游戏 `mods/DarvRelicPoolMod/`，排除 `.sts2-workshop-uploader` 等点开头条目 |
+| 2026-11-01 | `DarvRelicPoolModSourceCode.zip` | 1.0.0 | 288 KB / 125 条目 | v1.0.0 源码包，取自 `9.SRC/DarvRelicPoolMod/`，排除 `.godot/`、`bin/`、`obj/`、`*.dll`、`*.pck`、`*.pdb` |
 
 发布页：https://github.com/Rim-World/STS2Mod-Redesign-Darv/releases/tag/v1.0.0
 
