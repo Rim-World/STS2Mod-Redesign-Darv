@@ -17,10 +17,13 @@
 | 2026-08-28 17:52 | `02-缓存与临时/图片/darv_epoch.png` | 达弗纪元立绘的中间产物 | PNG | 512 KB | 由 `.ctex` 提取 |
 | 2026-08-28 17:52 | `02-缓存与临时/图片/darv_event_cg.png` | 达弗事件 CG 的中间产物（成品见 `pics/darv.png`） | PNG | 2.6 MB | 同上 |
 | — | `02-缓存与临时/tmp-pck-extract/` | 原 `research/tmp-pck-extract/`，解包过程中的空目录 | 目录 | 0 | 历史遗留 |
+| 2026-11-01 19:50 | `01-旧Git仓库/remote-probe.git` | 整理期用于探查远端历史的临时克隆（`git init` + `git fetch origin --tags`），只读用途，非嵌套源码仓库 | Git 仓库 | 287 KB | 仓库整理时创建 |
+| 2026-11-01 20:03 | `02-缓存与临时/校验记录/` | blob 保全校验用的 oid 清单（`old_oids.txt` / `new_oids.txt` / `remote_new_oids.txt`）、整理提交信息（`commitmsg.txt`）、v1.0.0 发布说明（`release-notes.md`） | 纯文本 / Markdown | 28 KB | 仓库整理时生成 |
+| 2026-11-01 19:50 | `02-缓存与临时/远端根文件备份/` | 恢复前从远端 `main` 取出的 `.gitignore`、`LICENSE`、`README.md`、`README.zh.md` 副本，供对照 | 文本 / Markdown | 14 KB | 远端 `bb5aeab` |
 
 ## 说明
 
-- `01-旧Git仓库/`：本项目没有嵌套的克隆仓库（`9.SRC/DarvRelicPoolMod/` 下无 `.git`），故未使用。
+- `01-旧Git仓库/`：本项目 `9.SRC/DarvRelicPoolMod/` 下没有嵌套克隆，本目录只放整理期使用的远端探查克隆。
 - `03-运行日志/`：当前没有构建日志或运行日志需要归档。
 - `02-缓存与临时/图片/` 中的两张 PNG 与 `pics/` 中的成品重复，保留的是可再生成的过程文件。
 
@@ -31,6 +34,6 @@
 | `02-缓存与临时/pck_out/`、`tmp-pck-extract/` | 可清理 | 由 `TOOLS/scripts/pck_list.py` 随时可再生成 |
 | `02-缓存与临时/图片/` | 可清理 | 成品已在 `pics/` |
 | `02-缓存与临时/fonts/` | 保留 | 8 MB 字体为封面重制所需；若不再改封面可清理 |
-| `02-缓存与临时/代码片段/file_access_pack.cpp` | 保留 | 体积小，解包方法的知识来源 |
+| `02-缓存与临时/代码片段/file_access_pack.cpp`、`02-缓存与临时/校验记录/`、`01-旧Git仓库/remote-probe.git` | 保留 | 体积小，是整理过程与解包方法的证据 |
 
-合计 14 MB / 63 个文件。
+合计 14 MB / 99 个文件。
