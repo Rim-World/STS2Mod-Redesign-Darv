@@ -1,99 +1,120 @@
-English | [中文](README.zh.md)
+# 重做达弗（STS2Mod-Redesign-Darv）
 
-# If you like this mod, welcome to check out my other mods. They might be helpful to you.
+《杀戮尖塔2》mod：重构先古之民「达弗（Darv）」的三个选项，把原版的随机集合换成固定三槽位结构，并引入《杀戮尖塔1》的 BOSS 遗物与储君/亡灵契约师的先古遗物。
 
-## 1\. Design Goals
+Redesigns the three options of Ancient Darv in *Slay the Spire 2*: a fixed three-slot layout replaces the vanilla random relic sets, with Boss relics ported from *Slay the Spire 1* and new Ancient relics for the Regent and Necrobinder.
 
-After the beta 0.111.0 update, Darv would occasionally offer three options that were almost worthless or overly punishing.
+| 项 | 值 |
+|---|---|
+| Mod id | `DarvRelicPoolMod` |
+| 显示名 | 重做达弗（Redesign Darv） |
+| 版本 | 1.0.0 |
+| 作者 | 再玩小卡组找人弄你 |
+| 依赖 | `STS2-RitsuLib ≥ 0.5.14` |
+| 最低游戏版本 | 0.107.0（支持 default 0.107.x 与 public beta 0.111.0+） |
 
-This mod has three design goals:
+## 功能
 
-1. Reduce the chance of Darv offering three useless options at once;
-2. Bring in more fun and powerful Boss relics from Slay the Spire 1;
-3. Categorize Darv's relics: all Option 2 relics come with additional cost (Snecko Eye?); Option 3 keeps the vanilla 50% Dusty Tome; Option 1 contains all the remaining relics.
+### 三槽位结构
 
-## 2\. Main Features
+- **选项 1**：星盘 / 潘多拉魔盒 / 黑星 / 召唤铃铛 / 空鸟笼 五选一；符文金字塔先做一次 **20%** 判定占位。
+- **选项 2**：添水 / 灵体外质 / 贤者之石 / 天鹅绒颈圈 / 异蛇之眼 五选一；仅在选项 1 未命中时再对符文金字塔做一次 **20%** 判定。两槽位互斥，金字塔合计概率约 **36%**。
+- **选项 3**：尘封魔典 **50%** / 职业专属遗物池 **50%**（池内均等）。
 
-This mod redesigns the three options of Ancient Darv, and only affects the five vanilla characters.
+### 职业专属池
 
-**Option 1**: Runic Pyramid is checked first at a 20% chance; if it misses, the chance is split evenly among Astrolabe / Black Star / Empty Cage / Pandora's Box / Calling Bell.
+| 职业 | 池内容 |
+|---|---|
+| 铁甲战士 | 符文立方体、痛楚印记 |
+| 静默猎手 | 悬浮风筝、袖剑 |
+| 故障机器人 | 核能电池、机械臂 |
+| 储君 | 先古月亮糕点、先古迷你储君、先古橙色团块 |
+| 亡灵契约师 | 先古书签、先古大帽子、先古象牙麻将牌 |
 
-**Option 2**: Runic Pyramid is checked first at a 20% chance (only if Option 1 did not roll the Pyramid); if it misses, the chance is split evenly among Sozu / Ectoplasm / Philosopher's Stone / Velvet Choker / Snecko Eye.
+前三个职业的 6 件来自《杀戮尖塔1》，效果照搬；储君/亡灵的 6 件是其稀有遗物的加强版，与稀有版**双向互斥**：已持有稀有版则达弗不再给出对应先古版，获得先古版则本局该稀有版不再从任何渠道出现。
 
-**Option 3**: Dusty Tome at 50% / character relic pool at 50% (evenly random within the pool).
+### 设置页（RitsuLib）
 
-Runic Pyramid never appears in both Option 1 and Option 2 at the same time, with a combined chance of about 36%.
+1. 5 个职业开关，关闭后该职业三个选项完全回退到**该版本原版**逻辑；
+2. 铁甲战士「痛楚印记」与 故障机器人「核能电池」互换（塔2 把塔1 的状态牌体系给了故障机器人）；
+3. 5 个「槽位 2 异蛇之眼出现开关」按职业分开（蛇眼的加费逻辑对储君适配很差）；
+4. 联机说明；
+5. **保存并退出**：只有点击该按钮才写盘，未保存的改动不会生效，退出设置界面即丢弃。
 
-The character relic pool is as follows:
-- Ironclad: Runic Cube, Mark of Pain (25% each)
-- Silent: Hovering Kite, Wrist Blade (25% each)
-- Defect: Nuclear Battery, Inserter (25% each)
-- Regent: Ancient Lunar Pastry, Ancient Mini Regent, Ancient Orange Dough (~16.7% each)
-- Necrobinder: Ancient Bookmark, Ancient Big Hat, Ancient Ivory Tile (~16.7% each)
+## 兼容性
 
-The six relics for the Ironclad, Silent and Defect all come from Slay the Spire 1. The six new Ancient relics for the Regent/Necrobinder are upgraded versions of their six Rare relics, with the following effects:
+- 支持 default 0.107.x 与 public beta 0.111.0 及以上；两版本存在虚方法签名差异的接口通过可选补丁 + 运行时反射自适应，效果一致。
+- 仅对原版五职业生效；mod 角色与未来新角色自动回退原版达弗逻辑。
+- 联机兼容性未经仔细测试（各玩家按自己的设置生成选项）。
+- 不保证与盗版、修改版、移动版、老旧版本、冷门 mod、次级 mod 的兼容性。
+- 语言：简中（zhs）/ 繁中（zht）/ 英文（eng），其他语言回退英文。
 
-- Ancient Lunar Pastry: At the end of your turn, gain 2 Stars.
-- Ancient Mini Regent: The first time you gain and spend Stars each turn, gain 1 Strength.
-- Ancient Orange Dough: At the start of each combat, add 3 random upgraded Colorless cards to your hand.
-- Ancient Bookmark: At the end of your turn, a random Retained card costs 1 less for the rest of this combat.
-- Ancient Big Hat: At the start of each combat, add 3 random upgraded Ethereal cards to your hand.
-- Ancient Ivory Tile: Whenever you play a card that actually costs 2 or more energy, gain 1 Energy.
+## 安装
 
-## 3\. Other Features & Details
+1. 通过创意工坊订阅 `STS2-RitsuLib`（最低 0.5.14）；
+2. 把发布包内的 `DarvRelicPoolMod.dll`、`DarvRelicPoolMod.pck`、`DarvRelicPoolMod.json` 放入
+   `Slay the Spire 2/mods/DarvRelicPoolMod/`；
+3. 启动游戏，在 mod 列表中确认已加载。
 
-You can configure this mod on the RitsuLib settings page; settings can only be saved by clicking the "Save and Quit the Game" button at the very bottom.
+## 构建
 
-1. You can toggle each character individually; when disabled, all three Darv options for that character return to the vanilla effects and probabilities.
-2. You can swap the Ironclad's Mark of Pain with the Defect's Nuclear Battery. This option exists because the Ironclad's status-card system in STS1 was ported to the Defect in STS2.
-3. You can set whether Snecko Eye appears in a character's Darv Option 2. This option exists because Snecko Eye clearly fits the Regent very poorly: his expensive cards are expensive in star cost rather than energy cost.
+前置：.NET SDK（net9.0）、Godot 4.5.1（带 .NET 支持）、本机已安装《杀戮尖塔2》。
 
-**Mutual-exclusion rule**: For the Regent and Necrobinder, once you own a certain Rare relic, its Ancient counterpart no longer appears in Darv's Option 3; conversely, once you obtain an Ancient relic, its Rare counterpart will no longer reappear from chests, shops, combat rewards, or events for the rest of the run.
+```powershell
+cd 9.SRC/DarvRelicPoolMod
+./build.ps1
+```
 
-If you own all three Rare relics, Darv's Option 3 becomes 100% Dusty Tome. (This scenario is almost impossible in practice.)
+`build.ps1` 依次执行 `dotnet build` → Godot `--headless --import` → `--export-pack`，最后把 dll/pdb/pck/json 复制到游戏 `mods/DarvRelicPoolMod/`。
 
-## 4\. Impact (Based on My Understanding of the Game)
+两条必须遵守的约束：
 
-Runic Pyramid's overall chance is raised to 36%, compared to 31.25% in the 0.107.x and about 25% in the 0.111.0;
+- pck 内所有资源必须带 `res://DarvRelicPoolMod/` 前缀，否则会覆盖游戏同名资源且不会被本地化合并；
+- `export_presets.cfg` 的 `export_filter` 必须是 `selected_resources`。
 
-Originally, Sozu and Ectoplasm could only appear in Act 2. They can now also appear in Act 3 , with their negative effects significantly reduced.
+## 目录结构
 
-The six relics ported from STS1 mostly perform significantly better in STS2 than in STS1, and the six newly designed Ancient relics are extremely versatile, so it is no longer possible to be offered three useless options.
+```
+STS2Mod-达弗修改/
+├── AGENTS.md            # 工作区通用规范（拷贝自上级目录）
+├── README.md            # 本文件
+├── CHANGELOG.md         # Keep a Changelog 单文件更新日志
+├── LICENSE              # MIT
+├── 1.ADR/               # 架构决策记录（索引 ADR.md）
+├── 2.PLANS/             # 施工计划与回填（索引 PLANS.md）
+├── 3.DOCS/              # 知识与调研报告（索引 DOCS.md）
+├── 4.SDD/               # 软件设计文档（索引 SDD.md）
+├── 5.ChangeLog/         # 版本日志分片（索引 ChangeLog.md）
+├── 9.SRC/               # 源码工程 DarvRelicPoolMod/
+├── 10.OUTPUT/           # 构建产物与发布包（索引 output.md，其余不入库）
+├── PRIVACY/             # 隐私与机密（索引 PRIVACY.md，不入库）
+├── TMP/                 # 临时与过程文件（索引 TMP.md，其余不入库）
+├── TOOLS/               # 自写脚本（索引 TOOLS.md）
+├── description/         # 创意工坊/发布文案（中英文）
+└── pics/                # 封面与素材图
+```
 
-Darv may still not be the most powerful Ancient, but now he at least reaches the average level of the Ancients.
+## 文档索引
 
-Save-file impact: past run records are unaffected; in new runs, once this mod is disabled, the relics it adds are no longer available and the run data is handled by the normal game mechanics.
+- 决策：[1.ADR/ADR.md](1.ADR/ADR.md)
+- 计划：[2.PLANS/PLANS.md](2.PLANS/PLANS.md)
+- 知识与报告：[3.DOCS/DOCS.md](3.DOCS/DOCS.md)
+- 设计：[4.SDD/001-总体设计.md](4.SDD/001-总体设计.md)
+- 版本日志：[5.ChangeLog/ChangeLog.md](5.ChangeLog/ChangeLog.md)
+- 发布文案：[description/重做达弗_中文.md](description/重做达弗_中文.md)、[description/重做达弗_英文.md](description/重做达弗_英文.md)
 
-## 5\. Language & Environment & Version
+## 版本
 
-This Mod only supports Chinese（zhs、zht）and English（eng）,with other languages showing English。
+当前 `1.0.0`（2026-08-29）。详见 [CHANGELOG.md](CHANGELOG.md)。
 
-This mod depends on the base mod RitsuLib (minimum version 0.5.14).
+## 致谢
 
-This mod supports the default 0.107.x branch and public beta 0.111.0 and above (interfaces with virtual-method signature differences between the two versions are adapted at runtime via optional patches + reflection, with identical effects).
+- 使用 Deepseek Harness（WebUI）+ DeepSeek V4 Flash（0731 GA）开发；感谢 Saint Liang。
+- 感谢《杀戮尖塔2》团队让 mod 制作对玩家更友好。
+- 感谢 BaseLib 与 RitsuLib 的开发者提供的开源实现与文档。
 
-In theory, as long as there are no major API updates or changes to game content, this mod should automatically adapt to new versions without any modification.
+## 开源地址
 
-## 6\. Implementation & Compatibility
+https://github.com/Rim-World/STS2Mod-Redesign-Darv
 
-This mod is implemented on the RitsuLib patcher framework (Harmony patches): it replaces Darv's option generation, the enumeration and display of the collection subcategory, and the settings page and saving.
-
-The art assets of the six STS1 relics are cropped to fit STS2; the six custom Ancient relics reuse official assets.
-
-Known limitations: multiplayer compatibility has not been carefully tested; characters other than the five vanilla ones (mod characters and future new characters) automatically fall back to the vanilla Darv logic.
-
-Compatibility is not guaranteed with pirated copies, modified versions, mobile versions, outdated versions, niche mods, or secondary mods.
-
-## 7\. Credits
-
-This mod was made with Deepseek Harness (WebUI) + DeepSeek V4 Flash (0731 GA). Thanks to Saint Liang.
-
-Thanks to the Slay the Spire 2 team for their efforts to make modding easier for players.
-
-Thanks to the BaseLib and RitsuLib developers for their open-source implementations and documentation.
-
-## 8\. Open-Source Repository & Contact
-
-Open-source repository: https://github.com/Rim-World/STS2Mod-Redesign-Darv
-
-Feel free to leave your comments and feedback in the comment section.
+许可：[MIT](LICENSE)。欢迎在仓库 issue 与创意工坊评论区反馈。
