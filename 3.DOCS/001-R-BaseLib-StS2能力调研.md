@@ -1,6 +1,6 @@
 # 001-R BaseLib-StS2 能力调研报告
 
-> 状态：定稿 v1.0（2026-08-23）。基于本地仓库 `C:\Users\13167\Desktop\Mod\STS2-Reference\BaseLib-StS2`（v3.4.0，浅克隆）＋游戏 111 反编译源码＋ModTemplate-StS2 模板，并交叉核对 BaseLib 官方 Wiki（alchyr.github.io/BaseLib-Wiki）与 ModTemplate Wiki。
+> 状态：定稿 v1.0（2026-08-23）。基于本地仓库 `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\BaseLib-StS2`（v3.4.0，浅克隆）＋游戏 111 反编译源码＋ModTemplate-StS2 模板，并交叉核对 BaseLib 官方 Wiki（alchyr.github.io/BaseLib-Wiki）与 ModTemplate Wiki。
 > 结论先行：**BaseLib 是"新增内容"导向的框架，没有修改既有 vanilla 事件/遗物/Ancient 的通用 API；修改达弗需要自写 Harmony patch。** BaseLib 的价值在于新遗物注册、配置界面、存档、本地化、跨版本兼容工具。
 
 ## 1. 项目概况

@@ -29,11 +29,11 @@
 
 ## 参考库（本机路径）
 
-- `C:\Users\13167\Desktop\Mod\STS2-Reference\0.STS1-Reference\`：杀戮尖塔 1 参考（Java/libGDX，CFR 反编译 + 本地化）。
-- `C:\Users\13167\Desktop\Mod\STS2-Reference\1.STS2-107Reference\`：v0.107（default）反编译源码 + 14 语言本地化。
-- `C:\Users\13167\Desktop\Mod\STS2-Reference\2.STS2-111Reference\`：v0.111（beta）反编译源码 + 16 语言本地化。
-- `C:\Users\13167\Desktop\Mod\STS2-Reference\BaseLib-StS2\`、`STS2-RitsuLib\`：两个基础库的本地仓库副本；`ritsulib-decompiled*`：RitsuLib 解包产物。
-- `C:\Users\13167\Desktop\Mod\STS2-Reference\ModTemplate-StS2\`：Alchyr 官方 mod 模板（BaseLib 依赖）。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\0.STS1-Reference\`：杀戮尖塔 1 参考（Java/libGDX，CFR 反编译 + 本地化）。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\1.STS2-107Reference\`：v0.107（default）反编译源码 + 14 语言本地化。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\2.STS2-111Reference\`：v0.111（beta）反编译源码 + 16 语言本地化。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\BaseLib-StS2\`、`STS2-RitsuLib\`：两个基础库的本地仓库副本；`ritsulib-decompiled*`：RitsuLib 解包产物。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\ModTemplate-StS2\`：Alchyr 官方 mod 模板（BaseLib 依赖）。
 - 线上：BaseLib Wiki（alchyr.github.io/BaseLib-Wiki）、RitsuLib 文档（sts2-ritsulib.ritsukage.com）、ModTemplate Wiki。
 - 游戏：`C:\Game\Steam\steamapps\common\Slay the Spire 2`（当前 v0.111.0；工作坊含 BaseLib v3.4.5、RitsuLib v0.5.14）。
 

@@ -1,6 +1,6 @@
 # 002-R STS2-RitsuLib 能力调研报告
 
-> 状态：定稿 v1.0（2026-08-23）。基于本地仓库 `C:\Users\13167\Desktop\Mod\STS2-Reference\STS2-RitsuLib`（v0.5.10）＋解包 `ritsulib-decompiled-core`（与仓库 src 同版本 0.5.10，partial 拆分，无额外功能）＋`ritsulib-decompiled`（loader 侧）＋游戏 107/111 反编译源码；并核对工作坊实装版本与官方文档站。
+> 状态：定稿 v1.0（2026-08-23）。基于本地仓库 `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\STS2-RitsuLib`（v0.5.10）＋解包 `ritsulib-decompiled-core`（与仓库 src 同版本 0.5.10，partial 拆分，无额外功能）＋`ritsulib-decompiled`（loader 侧）＋游戏 107/111 反编译源码；并核对工作坊实装版本与官方文档站。
 > 结论先行：**RitsuLib 提供"向达弗追加新选项"的专门 API（`AncientOption<Darv>`），但"修改原有候选池/概率"无现成 API，需用其 Harmony 补丁脚手架自写 patch；塔1遗物本体可注册，进达弗池仍需 patch。** 与 BaseLib 不冲突、不互相依赖，可同时使用。
 
 ## 1. 项目概况
