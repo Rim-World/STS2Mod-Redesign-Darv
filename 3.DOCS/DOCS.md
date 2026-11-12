@@ -17,6 +17,7 @@
 | 009 | R | [塔1 BOSS 遗物移植评估报告](009-R-塔1Boss遗物移植评估报告.md) | 塔1 BOSS 遗物整体移植到塔2 的可行性、工作量与风险分级 |
 | 010 | T | [手动测试方案](010-T-手动测试方案.md) | 完整手动测试流程：安装、槽位分布统计、六遗物效果、设置开关、递进逻辑、图鉴、语言、边界、107 双版本；含控制台 `ancient DARV` 用法与统计模板 |
 | 011 | T | [pck 解包方法与达弗 CG 定位](011-T-pck解包方法与达弗CG定位.md) | Godot pack format 3 头部与目录结构、ctex→WebP→PNG 提取法；达弗全部资源路径（事件 CG、纪元立绘、图标）；产出 `pics/darv.png` |
+| 012 | R | [v0.113 兼容性评估](012-R-v0.113兼容性评估.md) | 2026-11-13 | v0.113.0 兼容评估：未发现失效点；记录两处行为差异（新增 `AllowedOptions` 遗物过滤被 Prefix 绕过、`RelicModel.IsAllowed` 改非虚）；RitsuLib 0.5.14 → 0.6.11 完成 IL 层逐参比对，38 项引用全部一致；含实机检查清单 |
 
 ## 第三方资料留档
 
@@ -32,8 +33,8 @@
 - `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\0.STS1-Reference\`：杀戮尖塔 1 参考（Java/libGDX，CFR 反编译 + 本地化）。
 - `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\1.STS2-107Reference\`：v0.107（default）反编译源码 + 14 语言本地化。
 - `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\2.STS2-111Reference\`：v0.111（beta）反编译源码 + 16 语言本地化。
-- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\BaseLib-StS2\`、`STS2-RitsuLib\`：两个基础库的本地仓库副本；`ritsulib-decompiled*`：RitsuLib 解包产物。
-- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\ModTemplate-StS2\`：Alchyr 官方 mod 模板（BaseLib 依赖）。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\6.Mod-Sources\BaseLib-StS2\`、`6.Mod-Sources\STS2-RitsuLib\`：两个基础库的本地仓库副本；`ritsulib-decompiled*`：RitsuLib 解包产物。
+- `C:\Users\<用户名>\Desktop\Mod\STS2-Reference\6.Mod-Sources\ModTemplate-StS2\`：Alchyr 官方 mod 模板（BaseLib 依赖）。
 - 线上：BaseLib Wiki（alchyr.github.io/BaseLib-Wiki）、RitsuLib 文档（sts2-ritsulib.ritsukage.com）、ModTemplate Wiki。
 - 游戏：`C:\Game\Steam\steamapps\common\Slay the Spire 2`（当前 v0.111.0；工作坊含 BaseLib v3.4.5、RitsuLib v0.5.14）。
 
