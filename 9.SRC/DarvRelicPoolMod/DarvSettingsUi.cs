@@ -224,6 +224,7 @@ public static class DarvSettingsUi
                 if (_sneckoNecrobinderBinding!.PendingValue is bool v11) s.SneckoNecrobinder = v11;
             });
             store.Save("settings");
+            DarvSettings.ReloadCurrent();
 
             ResetPendingBindings();
 

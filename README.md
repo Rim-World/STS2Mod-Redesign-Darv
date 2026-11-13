@@ -8,7 +8,7 @@ Redesigns the three options of Ancient Darv in *Slay the Spire 2*: a fixed three
 |---|---|
 | Mod id | `DarvRelicPoolMod` |
 | 显示名 | 重做达弗（Redesign Darv） |
-| 版本 | 1.0.1 |
+| 版本 | 1.0.4 |
 | 作者 | 再玩小卡组找人弄你 |
 | 依赖 | `STS2-RitsuLib ≥ 0.5.14` |
 | 最低游戏版本 | 0.107.0（支持 default 0.107.x、public beta 0.111.0、0.113.0） |
@@ -105,7 +105,7 @@ STS2Mod-达弗修改/
 
 ## 版本
 
-当前 `1.0.1`（2026-11-14）。详见 [CHANGELOG.md](CHANGELOG.md)。
+当前 `1.0.4`（2026-11-14）。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 致谢
 

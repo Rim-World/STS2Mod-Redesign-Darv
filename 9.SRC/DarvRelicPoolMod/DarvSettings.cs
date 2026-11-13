@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Logging;
 using STS2RitsuLib;
 
 namespace DarvRelicPoolMod;
@@ -33,8 +34,27 @@ public sealed class DarvSettings
         return RitsuLibFramework.GetDataStore(ModEntry.ModId).Get<DarvSettings>("settings");
     }
 
-    /// <summary>当前生效的设置 = 磁盘值（未保存的改动不影响；保存并退出后重启即按新值）。</summary>
-    public static DarvSettings Current => Load();
+    /// <summary>
+    /// 当前生效的设置 = 启动时缓存的磁盘值。
+    /// 补丁方法只读这个静态字段，避免在 UI 补丁热路径里反复走泛型数据访问；
+    /// 保存并退出后 ReloadCurrent，重启即按新值（与原有生效语义一致）。
+    /// </summary>
+    public static DarvSettings Current = new();
+
+    /// <summary>启动期重载缓存；失败时保留默认值并记录日志，不让设置读取阻断补丁。</summary>
+    public static void ReloadCurrent()
+    {
+        try
+        {
+            Current = Load();
+            Log.Info($"{ModEntry.ModId}: settings cache loaded.");
+        }
+        catch (Exception e)
+        {
+            Current = new DarvSettings();
+            Log.Error($"{ModEntry.ModId}: settings cache load failed; using defaults: {e}");
+        }
+    }
 
     public bool IsEnabledForCharacter(string characterEntry)
     {

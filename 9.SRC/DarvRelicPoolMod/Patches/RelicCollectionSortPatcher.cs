@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
-using MegaCrit.Sts2.Core.Entities.Relics;
+using Godot;
 using MegaCrit.Sts2.Core.Nodes.Screens.RelicCollection;
-using MegaCrit.Sts2.Core.Unlocks;
-using STS2RitsuLib.Patching.Models;
 
 namespace DarvRelicPoolMod.Patches;
 
 /// <summary>
-/// 图鉴排序：图鉴"先古"分类的达弗子分类默认按遗物标题排序；
-/// 本 patch 把本 mod 遗物按 铁甲(2)→静默(2)→储君(3)→亡灵(3)→故障(2) 的五职业顺序连续排列
-/// （用户要求：铁甲战士-静默猎手-储君-亡灵契约师-故障机器人）。
-/// 开启"交换痛楚印记与核能电池"时，铁甲/故障组内顺序随互换联动。
+/// 图鉴排序（0.113）：图鉴“先古”分类的达弗子分类默认按遗物标题排序；
+/// 本 helper 把本 mod 遗物按 铁甲(2)→静默(2)→储君(3)→亡灵(3)→故障(2) 的五职业顺序连续排列。
+/// 由 RelicCollectionOutlinePatcher 在 LoadRelicNodes 之后调用，不再单独挂 Harmony 补丁。
+/// 不读取 NRelicCollectionCategory 的 private 字段：通过条目父节点 GridContainer 分组处理。
 /// </summary>
-public sealed class RelicCollectionSortPatcher : IPatchMethod
+public static class RelicCollectionSortPatcher
 {
     private const string Prefix = "DARV_RELIC_POOL_MOD_RELIC_";
 
-    // 新 6 件先古遗物（储君 3 件在前、亡灵契约师 3 件在后；位于静默组与故障组之间）
     private static readonly string[] AncientMiddle =
     [
         Prefix + "ANCIENT_LUNAR_PASTRY",
@@ -50,73 +47,54 @@ public sealed class RelicCollectionSortPatcher : IPatchMethod
         Prefix + "INSERTER",
     ];
 
-    public static string PatchId => "darv_relic_collection_sort";
-    public static string Description => "Group Darv mod relics by character at the end of the Darv subcategory";
-    public static bool IsCritical => false;
-
-    public static ModPatchTarget[] GetTargets() =>
-    [
-        PatchTarget.Method<NRelicCollectionCategory>(nameof(NRelicCollectionCategory.LoadRelics)),
-    ];
-
-    public static void Postfix(NRelicCollectionCategory __instance, RelicRarity relicRarity)
+    public static void Apply(IReadOnlyList<NRelicCollectionEntry> entries)
     {
-        try
+        foreach (var group in entries
+                     .Where(GodotObject.IsInstanceValid)
+                     .GroupBy(entry => entry.GetParent())
+                     .Where(group => group.Key is GridContainer))
         {
-            if (relicRarity != RelicRarity.Ancient)
+            var modEntries = group.Where(IsModEntry).ToList();
+            if (modEntries.Count == 0)
             {
-                return;
+                continue;
             }
-            var settings = DarvSettings.Current;
-            var order = settings.SwapMarkOfPainNuclearBattery ? SwappedOrder : DefaultOrder;
 
-            foreach (var sub in __instance._subCategories)
+            var container = (GridContainer)group.Key!;
+            var order = DarvSettings.Current.SwapMarkOfPainNuclearBattery ? SwappedOrder : DefaultOrder;
+            var nonMod = group.Where(entry => !modEntries.Contains(entry)).ToList();
+            var orderedMod = new List<NRelicCollectionEntry>(modEntries.Count);
+
+            foreach (var entryName in order)
             {
-                var container = sub._relicsContainer;
-                if (container == null)
+                var match = modEntries.FirstOrDefault(entry => entry.relic.Id.Entry == entryName);
+                if (match != null)
                 {
-                    continue;
-                }
-                var entries = container.GetChildren().OfType<NRelicCollectionEntry>().ToList();
-                if (entries.Count == 0)
-                {
-                    continue;
-                }
-                var modEntries = entries.Where(e => e.relic != null && e.relic.Id.Entry.StartsWith(Prefix, System.StringComparison.Ordinal)).ToList();
-                if (modEntries.Count == 0)
-                {
-                    continue;
-                }
-                var nonMod = entries.Where(e => !modEntries.Contains(e)).ToList();
-                var orderedMod = new List<NRelicCollectionEntry>(modEntries.Count);
-                foreach (var entryName in order)
-                {
-                    var match = modEntries.FirstOrDefault(e => e.relic.Id.Entry == entryName);
-                    if (match != null)
-                    {
-                        orderedMod.Add(match);
-                    }
-                }
-                // 其余未匹配的 mod 条目（理论不发生）追加在末尾保持稳定
-                orderedMod.AddRange(modEntries.Where(e => !orderedMod.Contains(e)));
-
-                foreach (var e in entries)
-                {
-                    container.RemoveChild(e);
-                }
-                foreach (var e in nonMod)
-                {
-                    container.AddChild(e);
-                }
-                foreach (var e in orderedMod)
-                {
-                    container.AddChild(e);
+                    orderedMod.Add(match);
                 }
             }
+
+            // 其余未匹配的 mod 条目（理论不发生）追加在末尾保持稳定
+            orderedMod.AddRange(modEntries.Where(entry => !orderedMod.Contains(entry)));
+
+            foreach (var entry in group)
+            {
+                container.RemoveChild(entry);
+            }
+            foreach (var entry in nonMod)
+            {
+                container.AddChild(entry);
+            }
+            foreach (var entry in orderedMod)
+            {
+                container.AddChild(entry);
+            }
         }
-        catch (System.Exception e)
-        {
-            MegaCrit.Sts2.Core.Logging.Log.Error($"{ModEntry.ModId}: sort patch failed: {e}");
-        }
+    }
+
+    private static bool IsModEntry(NRelicCollectionEntry entry)
+    {
+        return entry.relic != null
+            && entry.relic.Id.Entry.StartsWith(Prefix, StringComparison.Ordinal);
     }
 }

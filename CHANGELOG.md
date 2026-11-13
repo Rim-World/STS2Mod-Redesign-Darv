@@ -12,6 +12,17 @@
 
 提交编号：`8fe5b8b1ccdb340387eabd7c541bd1db8171eda3`
 
+## [1.0.4] - 2026-11-14
+
+### 修复
+
+- 修复袖剑（WristBlade）+4 伤害在 0.113 静默失效：1.0.3 的 `Type.GetType` 在该加载环境返回 `null`，只注册了 5 参 `ModifyDamageAdditive`，而 0.113 只有 6 参方法。1.0.4 改为从已加载的 `sts2` 程序集取 `CardPlay` 类型，并用 `GetMethod` 检查 6 参签名；107 选 5 参，111/113 选 6 参。
+- 修复 0.113 图鉴整页空白（1.0.2）以及外观/排序补丁叠加在已占用方法上产生的 333 条 MonoMod JIT 异常（1.0.3）：外观与排序合并到 `NRelicCollectionCategory.LoadRelicNodes` 单 Postfix，并加 Finalizer 兜底。
+
+### 变更
+
+- 版本号 `1.0.4`；三槽位结构、设置页、本地化、图鉴轮廓与排序不变。
+
 ## [1.0.1] - 2026-11-14
 
 ### 修复

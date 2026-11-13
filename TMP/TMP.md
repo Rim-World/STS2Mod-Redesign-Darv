@@ -21,6 +21,7 @@
 | 2026-11-01 20:03 | `02-缓存与临时/校验记录/` | blob 保全校验用的 oid 清单（`old_oids.txt` / `new_oids.txt` / `remote_new_oids.txt`）、整理提交信息（`commitmsg.txt`）、v1.0.0 发布说明（`release-notes.md`） | 纯文本 / Markdown | 28 KB | 仓库整理时生成 |
 | 2026-11-01 19:50 | `02-缓存与临时/远端根文件备份/` | 恢复前从远端 `main` 取出的 `.gitignore`、`LICENSE`、`README.md`、`README.zh.md` 副本，供对照 | 文本 / Markdown | 14 KB | 远端 `bb5aeab` |
 | 2026-11-13 23:24 | `compat-build/` | 107 / 111 / 113 三版本编译矩阵与 `RelicOption` 反射垫片原型；含 `build107/`、`build111/`、`build113/`、`src/`、`logs/` | C# / MSBuild 产物 | 2.8 MB / 562 文件 | 由本机三份 publicized `sts2.dll` 缓存编译生成 |
+| 2026-11-14 02:12 | `final-build-1.0.1/1.0.4/`、`final-build-1.0.1/refs*/` | 1.0.4 三版本引用、编译日志与安装包；含 `logs/diag-1.0.4*.log`、`logs/install-1.0.4.log` | DLL / 文本日志 | 约 1 MB / 10 文件 | 本机构建 |
 | 2026-11-14 00:32 | `final-build-1.0.1/` | 1.0.1 最终构建的引用程序集、三版本 DLL、安装前 1.0.0 备份、构建日志与反射验证；含 `refs107/`、`refs111/`、`refs113/`、`backup-1.0.0/`、`logs/`、`reflection-test/` | DLL / C# / 文本日志 | 约 40 MB / 40 文件 | 本机构建；引用来自 `.godot` 缓存与游戏目录 |
 
 ## 说明

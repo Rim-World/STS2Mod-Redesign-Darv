@@ -35,6 +35,9 @@ public static class ModEntry
                     autoCreateIfMissing: true);
             }
 
+            // 启动期一次性读取设置，之后补丁只读静态缓存（避开 0.113 的 MonoMod JIT 钩子问题）
+            DarvSettings.ReloadCurrent();
+
             // 设置页（含多语言、保存并退出、联机说明）
             DarvSettingsUi.Register();
 
@@ -47,7 +50,6 @@ public static class ModEntry
             // 图鉴外观 + 设置暂存清理 + 先古图标渲染层翻转（可选：失败不影响玩法）
             var cosmeticPatcher = RitsuLibFramework.CreatePatcher(ModId, "darv_cosmetic");
             cosmeticPatcher.RegisterPatch<Patches.RelicCollectionOutlinePatcher>();
-            cosmeticPatcher.RegisterPatch<Patches.RelicCollectionSortPatcher>();
             cosmeticPatcher.RegisterPatch<Patches.SettingsPendingResetPatcher>();
             cosmeticPatcher.RegisterPatch<Patches.NRelicMirrorPatcher>();
             cosmeticPatcher.PatchAll();
