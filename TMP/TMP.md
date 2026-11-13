@@ -20,6 +20,7 @@
 | 2026-11-01 19:50 | `01-旧Git仓库/remote-probe.git` | 整理期用于探查远端历史的临时克隆（`git init` + `git fetch origin --tags`），只读用途，非嵌套源码仓库 | Git 仓库 | 287 KB | 仓库整理时创建 |
 | 2026-11-01 20:03 | `02-缓存与临时/校验记录/` | blob 保全校验用的 oid 清单（`old_oids.txt` / `new_oids.txt` / `remote_new_oids.txt`）、整理提交信息（`commitmsg.txt`）、v1.0.0 发布说明（`release-notes.md`） | 纯文本 / Markdown | 28 KB | 仓库整理时生成 |
 | 2026-11-01 19:50 | `02-缓存与临时/远端根文件备份/` | 恢复前从远端 `main` 取出的 `.gitignore`、`LICENSE`、`README.md`、`README.zh.md` 副本，供对照 | 文本 / Markdown | 14 KB | 远端 `bb5aeab` |
+| 2026-11-13 23:24 | `compat-build/` | 107 / 111 / 113 三版本编译矩阵与 `RelicOption` 反射垫片原型；含 `build107/`、`build111/`、`build113/`、`src/`、`logs/` | C# / MSBuild 产物 | 2.8 MB / 562 文件 | 由本机三份 publicized `sts2.dll` 缓存编译生成 |
 
 ## 说明
 
@@ -35,8 +36,9 @@
 | `02-缓存与临时/图片/` | 可清理 | 成品已在 `pics/` |
 | `02-缓存与临时/fonts/` | 保留 | 8 MB 字体为封面重制所需；若不再改封面可清理 |
 | `02-缓存与临时/代码片段/file_access_pack.cpp`、`02-缓存与临时/校验记录/`、`01-旧Git仓库/remote-probe.git` | 保留 | 体积小，是整理过程与解包方法的证据 |
+| `compat-build/` | 可清理 | 三版本编译矩阵可复现；`logs/` 是 013 / 014 的验证证据，保留日志、删除构建产物即可 |
 
-合计 14 MB / 99 个文件。
+合计约 17 MB / 661 个文件（含 `compat-build/` 的 2.8 MB / 562 文件）。
 
 ## 2026-11-01 清理记录
 
