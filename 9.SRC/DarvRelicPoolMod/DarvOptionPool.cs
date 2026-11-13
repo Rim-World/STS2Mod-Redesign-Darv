@@ -194,7 +194,7 @@ public static class DarvOptionPool
 
     private static EventOption MakeRelicOption(Darv darv, RelicModel? relic)
     {
-        return darv.RelicOption(relic!.ToMutable());
+        return RelicOptionCompat.Create(darv, relic!.ToMutable());
     }
 
     private static EventOption MakeDustyTomeOption(Darv darv, Player owner)
@@ -204,6 +204,6 @@ public static class DarvOptionPool
         {
             tome.SetupForPlayer(owner);
         }
-        return darv.RelicOption(tome);
+        return RelicOptionCompat.Create(darv, tome);
     }
 }

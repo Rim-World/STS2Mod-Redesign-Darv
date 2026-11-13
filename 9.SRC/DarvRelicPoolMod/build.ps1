@@ -1,3 +1,8 @@
+param(
+    # 可选：指定含 sts2.dll / 0Harmony.dll 的目录。默认使用 csproj 中的游戏目录。
+    [string]$Sts2DataDir = ''
+)
+
 $ErrorActionPreference = 'Stop'
 
 $root = $PSScriptRoot
@@ -7,7 +12,9 @@ $modId = 'DarvRelicPoolMod'
 $modOut = Join-Path $game "mods\$modId"
 
 Write-Host '==> Build .NET assembly'
-dotnet build (Join-Path $root "$modId.csproj") -c Debug -p:NuGetAudit=false
+$buildArgs = @((Join-Path $root "$modId.csproj"), '-c', 'Debug', '-p:NuGetAudit=false')
+if ($Sts2DataDir) { $buildArgs += "-p:Sts2DataDir=$Sts2DataDir" }
+dotnet build @buildArgs
 if ($LASTEXITCODE -ne 0) { throw 'dotnet build failed' }
 
 $dll = Join-Path $root '.godot\mono\temp\bin\Debug\DarvRelicPoolMod.dll'

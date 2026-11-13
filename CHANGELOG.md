@@ -12,6 +12,21 @@
 
 提交编号：`8fe5b8b1ccdb340387eabd7c541bd1db8171eda3`
 
+## [1.0.1] - 2026-11-14
+
+### 修复
+
+- 适配游戏 v0.113.0：`AncientEventModel.RelicOption` 删除三参重载后，mod 的 `AllPossibleOptions` 与选项生成不再抛 `MissingMethodException`。新增运行时反射垫片，兼容 0.107 / 0.111 / 0.113。
+- 修复 v0.113 打开遗物图鉴时整页空白：`AllPossibleOptions` 迭代器改为在补丁 `try/catch` 内立即枚举，异常可回退原版，不再中断 `NRelicCollection.LoadRelics`。
+- 修复 v0.113 `Loadout` 面板条目缺失：同一异常不再从 `AllPossibleOptions` 逃出。
+- 修复 v0.113 先古遗物图标镜像补丁读取未赋值 `NRelic.Model` 抛异常：改为 `NRelic._Ready` + `NRelic.Reload` 双入口，并安全处理模型未就绪。
+- 修复图鉴光效补丁读取未赋值 `NRelic.Model` 刷错误日志。
+
+### 变更
+
+- `build.ps1` 新增可选 `-Sts2DataDir`，可用缓存的旧版本 `sts2.dll` 编译并验证三版本兼容。
+- 版本号 `1.0.1`；玩法、选项池、设置和本地化未改动。
+
 ## [1.0.0] - 2026-08-29
 
 ### 新增

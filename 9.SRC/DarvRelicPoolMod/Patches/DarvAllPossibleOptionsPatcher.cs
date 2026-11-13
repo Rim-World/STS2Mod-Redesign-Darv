@@ -1,3 +1,4 @@
+using System.Linq;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models.Events;
 using STS2RitsuLib.Patching.Models;
@@ -23,7 +24,8 @@ public sealed class DarvAllPossibleOptionsPatcher : IPatchMethod
     {
         try
         {
-            __result = DarvAllPossibleOptions.Build(__instance);
+            // Build 是迭代器；必须在此处物化，异常才能被本 Prefix 的 catch 捕获并回退原版。
+            __result = DarvAllPossibleOptions.Build(__instance).ToList();
             return false;
         }
         catch (Exception e)

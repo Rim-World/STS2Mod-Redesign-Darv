@@ -22,7 +22,7 @@ public static class VanillaFallbackPool
         {
             if (relicSet.filter(owner))
             {
-                source.Add(darv.RelicOption(rng.NextItem(relicSet.relics).ToMutable()));
+                source.Add(RelicOptionCompat.Create(darv, rng.NextItem(relicSet.relics).ToMutable()));
             }
         }
 
@@ -37,7 +37,7 @@ public static class VanillaFallbackPool
             {
                 tome.SetupForPlayer(owner);
             }
-            list.Add(darv.RelicOption(tome));
+            list.Add(RelicOptionCompat.Create(darv, tome));
             return list;
         }
 

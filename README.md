@@ -8,10 +8,10 @@ Redesigns the three options of Ancient Darv in *Slay the Spire 2*: a fixed three
 |---|---|
 | Mod id | `DarvRelicPoolMod` |
 | 显示名 | 重做达弗（Redesign Darv） |
-| 版本 | 1.0.0 |
+| 版本 | 1.0.1 |
 | 作者 | 再玩小卡组找人弄你 |
 | 依赖 | `STS2-RitsuLib ≥ 0.5.14` |
-| 最低游戏版本 | 0.107.0（支持 default 0.107.x 与 public beta 0.111.0+） |
+| 最低游戏版本 | 0.107.0（支持 default 0.107.x、public beta 0.111.0、0.113.0） |
 
 ## 功能
 
@@ -43,8 +43,8 @@ Redesigns the three options of Ancient Darv in *Slay the Spire 2*: a fixed three
 
 ## 兼容性
 
-- 支持 default 0.107.x 与 public beta 0.111.0 及以上；两版本存在虚方法签名差异的接口通过可选补丁 + 运行时反射自适应，效果一致。
-- 仅对原版五职业生效；mod 角色与未来新角色自动回退原版达弗逻辑。
+- 支持 default 0.107.x、public beta 0.111.0 与 0.113.0；版本间存在签名差异的接口通过可选补丁 + 运行时反射自适应，效果一致。
+- 仅对原版五职业生效；mod 角色与未来新角色（含 0.113 的愚者）自动回退原版达弗逻辑。
 - 联机兼容性未经仔细测试（各玩家按自己的设置生成选项）。
 - 不保证与盗版、修改版、移动版、老旧版本、冷门 mod、次级 mod 的兼容性。
 - 语言：简中（zhs）/ 繁中（zht）/ 英文（eng），其他语言回退英文。
@@ -105,7 +105,7 @@ STS2Mod-达弗修改/
 
 ## 版本
 
-当前 `1.0.0`（2026-08-29）。详见 [CHANGELOG.md](CHANGELOG.md)。
+当前 `1.0.1`（2026-11-14）。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 致谢
 

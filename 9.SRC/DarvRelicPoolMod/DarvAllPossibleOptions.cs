@@ -46,7 +46,7 @@ public static class DarvAllPossibleOptions
     {
         foreach (var relic in Pool)
         {
-            yield return darv.RelicOption(relic.ToMutable());
+            yield return RelicOptionCompat.Create(darv, relic.ToMutable());
         }
     }
 }

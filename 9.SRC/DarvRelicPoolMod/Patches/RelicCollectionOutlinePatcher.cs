@@ -35,12 +35,24 @@ public sealed class RelicCollectionOutlinePatcher : IPatchMethod
             {
                 return;
             }
-            if (__instance._relicNode is not NRelic n || n.Model == null)
+            if (__instance._relicNode is not NRelic n)
             {
                 return;
             }
+
+            RelicModel model;
+            try
+            {
+                model = n.Model;
+            }
+            catch (InvalidOperationException)
+            {
+                // 0.113 的 Model getter 在未赋值时会抛异常；此条目暂时没有模型，跳过即可。
+                return;
+            }
+
             var settings = DarvSettings.Current;
-            Color? color = GetOutlineColor(n.Model, settings);
+            Color? color = GetOutlineColor(model, settings);
             if (color == null)
             {
                 return;

@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Relics;
 using STS2RitsuLib.Patching.Models;
 
@@ -14,6 +15,9 @@ namespace DarvRelicPoolMod.Patches;
 /// 尺寸未就绪（任一子节点 Size 为 0）时用 Tree timer 延迟一帧重跑（布局完成后 Size 才确定）。
 /// 注意：不翻转 NRelic 自身 Scale——图鉴条目 hover 动画会覆盖 NRelic.Scale（1.25），
 /// 子节点翻转不受其影响。
+/// 0.113 起 NRelic._Ready 可能早于 Model 赋值，Model getter 会抛 InvalidOperationException。
+/// 双入口：Reload 覆盖 Model setter 的晚赋值；_Ready 保留原始“节点就绪后”的最终时序。
+/// 两个入口都先安全判空，重复应用幂等。
 /// </summary>
 public sealed class NRelicMirrorPatcher : IPatchMethod
 {
@@ -26,14 +30,16 @@ public sealed class NRelicMirrorPatcher : IPatchMethod
     public static ModPatchTarget[] GetTargets() =>
     [
         PatchTarget.Method<NRelic>("_Ready"),
+        PatchTarget.Method<NRelic>("Reload"),
     ];
 
     public static void Postfix(NRelic __instance)
     {
         try
         {
-            if (__instance.Model == null ||
-                !__instance.Model.Id.Entry.StartsWith(AncientPrefix, System.StringComparison.Ordinal))
+            RelicModel? model = TryGetModel(__instance);
+            if (model == null ||
+                !model.Id.Entry.StartsWith(AncientPrefix, System.StringComparison.Ordinal))
             {
                 return;
             }
@@ -60,6 +66,22 @@ public sealed class NRelicMirrorPatcher : IPatchMethod
         catch (System.Exception e)
         {
             MegaCrit.Sts2.Core.Logging.Log.Error($"{ModEntry.ModId}: NRelic mirror patch failed: {e}");
+        }
+    }
+
+    /// <summary>
+    /// 0.113 的 Model getter 在未赋值时抛 InvalidOperationException；Reload 在 _Ready 中可能先于 Model 赋值执行。
+    /// 返回 null 表示模型尚未就绪，本次跳过；后续 Model setter 会再次触发 Reload。
+    /// </summary>
+    private static RelicModel? TryGetModel(NRelic nRelic)
+    {
+        try
+        {
+            return nRelic.Model;
+        }
+        catch (System.InvalidOperationException)
+        {
+            return null;
         }
     }
 

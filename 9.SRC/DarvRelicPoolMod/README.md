@@ -70,7 +70,7 @@ This Mod only supports Chinese（zhs、zht）and English（eng）,with other lan
 
 This mod depends on the base mod RitsuLib (minimum version 0.5.14).
 
-This mod supports the default 0.107.x branch and public beta 0.111.0 and above (interfaces with virtual-method signature differences between the two versions are adapted at runtime via optional patches + reflection, with identical effects).
+This mod supports the default 0.107.x branch, public beta 0.111.0, and 0.113.0 (interfaces with signature differences between versions are adapted at runtime via optional patches + reflection, with identical effects). On 0.113.0, the new Fool character uses the vanilla fallback; the three-slot redesign still applies to the five original characters only.
 
 In theory, as long as there are no major API updates or changes to game content, this mod should automatically adapt to new versions without any modification.
 
